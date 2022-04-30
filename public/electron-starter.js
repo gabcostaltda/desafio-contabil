@@ -3,7 +3,7 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require("url");
 
-function createWindow () {
+function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
         width: 800,
@@ -19,12 +19,13 @@ function createWindow () {
     mainWindow.loadFile('index.html')
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    if (!app.isPackaged)
+        mainWindow.webContents.openDevTools()
 
     mainWindow.on('closed', () => mainWindow.destroy())
 
     const startUrl = process.env.ELECTRON_START_URL || url.format({
-        pathname: path.join(__dirname, '/../build/index.html'),
+        pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
     });
