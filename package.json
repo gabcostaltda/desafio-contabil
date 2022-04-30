@@ -3,8 +3,30 @@
   "version": "0.1.0",
   "author": "Gabriel Costa",
   "private": true,
-  "main": "public/electron-starter.js",
+  "description": "Aplicação de contabilidade",
+  "main": "./public/electron-starter.js",
   "homepage": "./",
+  "proxy": "http://localhost:3000",
+  "build": {
+    "appId": "com.electron.contabilize",
+    "productName": "Contabilize",
+    "files": [
+      "out/ **/*",
+      "node_modules/** /*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
+  },
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -22,15 +44,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "electron-forge start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
-    "dev": "nf -p 15000 start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "electron:start": "concurrently -k \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "electron:package:mac": "yarn build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "yarn build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "yarn build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
@@ -40,14 +61,10 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "last 1 electron version"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 electron version"
     ]
   },
   "devDependencies": {
@@ -56,9 +73,11 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "dotenv": "^16.0.0",
+    "concurrently": "^7.1.0",
+    "cross-env": "^7.0.3",
     "electron": "^18.1.0",
-    "foreman": "^3.0.1"
+    "electronmon": "^2.0.2",
+    "wait-on": "^6.0.1"
   },
   "config": {
     "forge": {
