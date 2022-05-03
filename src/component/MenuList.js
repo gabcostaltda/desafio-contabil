@@ -12,7 +12,7 @@ const MenuList = () => {
         {title: 'Contas a pagar', icon: <AttachMoney/>, path: paths.bills},
     ];
     return <Box
-        sx={{width: 250}}
+        sx={{width: 250, overflow: 'auto', mt: '64px'}}
         role="presentation"
     >
         <List>

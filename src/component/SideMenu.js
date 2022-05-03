@@ -1,10 +1,12 @@
-import {Box, Drawer} from "@mui/material";
+import {Box, Drawer, Toolbar} from "@mui/material";
 import MenuList from "./MenuList";
 
 const drawerWidth = 240;
 
 const SideMenu = () => {
-    return (<Box sx={{ display: 'flex' }}>
+    return (<Box sx={{display: 'flex'}}>
+        <Toolbar/>
+
         <Drawer
             variant="permanent"
             anchor='left'
@@ -15,9 +17,8 @@ const SideMenu = () => {
                     width: drawerWidth,
                     boxSizing: 'border-box',
                 },
-            }}
-        >
-            <MenuList />
+            }}>
+            <MenuList/>
         </Drawer>
     </Box>)
 }
