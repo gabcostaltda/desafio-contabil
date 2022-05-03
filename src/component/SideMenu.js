@@ -1,32 +1,25 @@
-import {Button, Drawer} from "@mui/material";
-import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
-import {useState} from "react";
+import {Box, Drawer} from "@mui/material";
 import MenuList from "./MenuList";
 
-const SideMenu = () => {
-    const [state, setState] = useState({});
-    const toggleDrawer = (open) =>
-        (event) => {
-            if (event.type === 'keydown'
-                && (event.key === 'Tab' || event.key === 'Shift')) {
-                return;
-            }
-            setState({...state, open});
-        };
+const drawerWidth = 240;
 
-    return (<>
-        <Button onClick={toggleDrawer(true)}>
-            <ViewHeadlineIcon/>
-        </Button>
+const SideMenu = () => {
+    return (<Box sx={{ display: 'flex' }}>
         <Drawer
+            variant="permanent"
             anchor='left'
-            open={state['open']}
-            onClose={toggleDrawer(false)}
-            onClick={toggleDrawer(!state['open'])}
+            sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: drawerWidth,
+                    boxSizing: 'border-box',
+                },
+            }}
         >
-            <MenuList toggleDrawer={toggleDrawer}/>
+            <MenuList />
         </Drawer>
-    </>)
+    </Box>)
 }
 
 export default SideMenu

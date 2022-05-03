@@ -13,14 +13,13 @@ function App() {
 
     return (
         <Box>
-            <h2>Contabilize</h2>
             <SideMenu/>
             <Routes>
+                <Route path={"/"} index element={<Home/>}/>
                 <Route path={paths.account} element={<Account/>}/>
                 <Route path={paths.bills} element={<Bills/>}/>
                 <Route path={paths.customer} element={<Customer/>}/>
                 <Route path={paths.provider} element={<Provider/>}/>
-                <Route path={"/"} element={<Home/>}/>
             </Routes>
         </Box>
     );
