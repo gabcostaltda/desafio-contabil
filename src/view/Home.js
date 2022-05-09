@@ -1,12 +1,11 @@
 import {AppBar, Box, Grid, Typography} from "@mui/material";
-import AccountCard from "../component/core/AccountCard";
+import AccountCard from "../component/core/bank_account/AccountCard";
 import BillsCard from "../component/core/BillsCard";
 import CustomerCard from "../component/core/CustomerCard";
 import ProviderCard from "../component/core/ProviderCard";
 import paths from "../paths";
 import TopBar from "../component/TopBar";
 
-console.log(paths)
 const drawerWidth = 240;
 const Home = () =>
     <Box sx={{display: 'flex'}}>

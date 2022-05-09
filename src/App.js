@@ -4,10 +4,11 @@ import SideMenu from "./component/SideMenu";
 import {Box} from "@mui/material";
 import './App.css'
 import paths from "./paths";
-import Account from "./view/Account";
+import BankAccount from "./view/bank_account/BankAccount";
 import Bills from "./view/Bills";
 import Customer from "./view/Customer";
 import Provider from "./view/Provider";
+import NewBankAccount from "./view/bank_account/NewBankAccount";
 
 function App() {
 
@@ -15,11 +16,12 @@ function App() {
         <Box>
             <SideMenu/>
             <Routes>
-                <Route path={"/"} index element={<Home/>}/>
-                <Route path={paths.account} element={<Account/>}/>
+                <Route path={paths.account} element={<BankAccount/>}/>
+                <Route path={paths.new_account} element={<NewBankAccount/>}/>
                 <Route path={paths.bills} element={<Bills/>}/>
                 <Route path={paths.customer} element={<Customer/>}/>
                 <Route path={paths.provider} element={<Provider/>}/>
+                <Route path={"/"} index element={<Home/>}/>
             </Routes>
         </Box>
     );
