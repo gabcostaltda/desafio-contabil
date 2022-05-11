@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, protocol} = require('electron')
+const {app, BrowserWindow, protocol} = require('client/public/electron')
 const path = require('path')
 const url = require("url");
 

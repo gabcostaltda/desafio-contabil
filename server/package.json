@@ -1,0 +1,19 @@
+{
+  "name": "@contabilize/server",
+  "version": "1.0.0",
+  "description": "Server for Contabilize App",
+  "main": "index.js",
+  "author": "gabcostadeveloper",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "url": "git@github.com:GabCostaSilva/desafio-contabil-frontend.git"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "koa": "^2.13.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
