@@ -12,18 +12,78 @@ import {
     Stack,
     Typography
 } from "@mui/material";
-import {useState} from "react";
+import {useEffect, useReducer, useState} from "react";
 import TopBar from "../../component/TopBar";
+import {createBankAccount} from "../../controller/BankAccountController";
+import {LoadingButton} from "@mui/lab";
+import {useNavigate} from 'react-router-dom'
 
+const formReducer = (state, event) => {
+    return {
+        ...state,
+        [event.name]: event.value
+    }
+}
 const NewBankAccount = () => {
-    const [bank, setBank] = useState({});
+    const [submitting, setSubmitting] = useState(false);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [formData, setFormData] = useReducer(formReducer, {
+        banco: "",
+        agencia: "",
+        conta: "",
+        digito: "",
+        saldo: 0.0
+    })
+    useEffect(() => {
+        validateForm(formData)
+            ? setIsFormValid(true)
+            : setIsFormValid(false)
+    }, [formData])
+
+    function validateForm(formData) {
+        return formData.conta !== ""
+            && formData.banco !== ""
+            && formData.agencia !== ""
+    }
+
+    const navigate = useNavigate()
+
+    const formatAccount = ({conta, digito}) => digito !== "" ? `${conta}-${digito}` : conta
+    const formatBalance = ({saldo}) => saldo.replace(",", ".")
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        setSubmitting(true);
+        setIsFormValid(true);
+
+        let response = await createBankAccount({
+            ...formData,
+            conta: formatAccount(formData),
+            saldo: formatBalance(formData)
+        });
+
+        if (response.status === 200) {
+            navigate("/contas")
+        } else {
+            alert("Deu ruim no servidor")
+            setSubmitting(false);
+        }
+    }
 
     const handleChange = (event) => {
-        setBank(event.target.value);
-    };
+        setFormData({
+            name: event.target.name,
+            value: event.target.value
+        })
+    }
 
-    return (<Container minWidth="sm"
-                       sx={{marginLeft: '240px', marginTop: '100px', display: 'flex', alignItems: 'baseline'}}>
+    return (<Container maxWidth="m"
+                       sx={{
+                           marginLeft: '240px',
+                           marginTop: '100px',
+                           display: 'flex',
+                           alignItems: 'baseline'
+                       }}>
         <TopBar title='Nova Conta'/>
         <Grid container
               rowSpacing={4}
@@ -37,9 +97,11 @@ const NewBankAccount = () => {
                     <Select
                         labelId="bank"
                         id="bank-select"
-                        value={bank}
                         label="Banco"
+                        name="banco"
+                        value={formData.banco}
                         onChange={handleChange}
+                        required={true}
                     >
                         <MenuItem value={"BRADESCO"}>Bradesco</MenuItem>
                         <MenuItem value={"ITAU"}>Itaú</MenuItem>
@@ -51,21 +113,35 @@ const NewBankAccount = () => {
             <Grid item xs={2}>
                 <FormControl>
                     <InputLabel htmlFor="agency">Agência</InputLabel>
-                    <Input id="agency" aria-describedby="required-agency"/>
+                    <Input id="agency"
+                           name="agencia"
+                           value={formData.agencia}
+                           onChange={handleChange}
+                           required={true}
+                           aria-describedby="required-agency"/>
                     <FormHelperText id="required-agency">*Obrigatório</FormHelperText>
                 </FormControl>
             </Grid>
             <Grid item xs={2}>
                 <FormControl>
                     <InputLabel htmlFor="account">Conta</InputLabel>
-                    <Input id="account" aria-describedby="required-account"/>
+                    <Input id="account"
+                           name="conta"
+                           value={formData.conta}
+                           onChange={handleChange}
+                           required={true}
+                           aria-describedby="required-account"/>
                     <FormHelperText id="required-account">*Obrigatório</FormHelperText>
                 </FormControl>
             </Grid>
             <Grid item xs={1}>
                 <FormControl>
                     <InputLabel htmlFor="account">Dígito</InputLabel>
-                    <Input id="account" aria-describedby="required-account"/>
+                    <Input id="account"
+                           name="digito"
+                           value={formData.digito}
+                           onChange={handleChange}
+                           aria-describedby="required-account"/>
                 </FormControl>
             </Grid>
             <Grid item xs={4}>
@@ -73,6 +149,9 @@ const NewBankAccount = () => {
                     <InputLabel htmlFor="balance">Saldo Inicial</InputLabel>
                     <Input id="balance"
                            aria-describedby="balance"
+                           name="saldo"
+                           value={formData.saldo}
+                           onChange={handleChange}
                            startAdornment={
                                <InputAdornment position="start">
                                    <Typography>R$: </Typography>
@@ -80,11 +159,22 @@ const NewBankAccount = () => {
                            }/>
                 </FormControl>
             </Grid>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={4} sx={{alignSelf: "flex-end"}}>
+                <Stack direction="row"
+                       spacing={2}
+                       justifyContent="center">
+                    <Button color="primary" variant="outlined">Voltar</Button>
+                    <LoadingButton color="success"
+                                   loading={submitting}
+                                   variant="contained"
+                                   loadingIndicator="Salvando..."
+                                   disabled={!isFormValid}
+                                   onClick={e => handleSubmit(e)}
+                    >Criar Conta</LoadingButton>
+                </Stack>
+            </Grid>
         </Grid>
-        <Stack direction="row" spacing={2} sx={{marginTop: '24px', marginRight: '280px', alignSelf: 'flex-end'}}>
-            <Button color="primary" variant="outlined">Voltar</Button>
-            <Button color="success" variant="contained">Criar Conta</Button>
-        </Stack>
     </Container>)
 }
 

@@ -22,10 +22,6 @@ const CustomTable = ({columns, rows}) => (<Paper sx={{
             </TableHead>
             <TableBody>
                 {rows
-                    .map(row => {
-                        console.log(row);
-                        return row
-                    })
                     .map((row, index) => (
                         <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                             {columns

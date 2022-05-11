@@ -16,7 +16,7 @@ const BankAccount = () => {
         }
 
         fetchBankAccounts()
-            .catch(error => console.error(error))
+            .catch(error => alert(error))
     }, [])
 
     function createData({icone = null, banco, agencia, conta, saldo}) {
