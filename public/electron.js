@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, protocol} = require('client/public/electron')
+const {app, BrowserWindow, protocol} = require('electron')
 const path = require('path')
 const url = require("url");
 
@@ -9,7 +9,7 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
         }
     })
 
@@ -29,6 +29,9 @@ function createWindow() {
         : "http://localhost:3000";
     mainWindow.loadURL(appURL);
 }
+
+const yourdirectoryorfilenamehere = path.join(app.getAppPath(), "server/src/index.js");
+console.log(yourdirectoryorfilenamehere)
 
 function setupLocalFilesNormalizerProxy() {
     protocol.registerHttpProtocol(

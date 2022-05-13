@@ -2,18 +2,23 @@
   "name": "@contabilize/server",
   "version": "1.0.0",
   "description": "Server for Contabilize App",
-  "main": "index.js",
-  "author": "gabcostadeveloper",
+  "main": "src/index.js",
+  "author": "Gabriel Costa <gabcostadeveloper@gmail.com>",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "repository": {
     "url": "git@github.com:GabCostaSilva/desafio-contabil-frontend.git"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "koa": "^2.13.4"
+    "koa": "^2.13.4",
+    "koa-router": "^10.1.1",
+    "sequelize": "^6.19.0",
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "sequelize-cli": "^6.4.1"
   }
 }

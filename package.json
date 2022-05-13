@@ -1,11 +1,76 @@
 {
-  "name": "contabilize-app",
-  "version": "1.0.0",
+  "name": "contabilize",
+  "version": "0.1.0",
   "private": true,
-  "workspaces": {
-    "packages": ["server", "client"]
-  },
-  "repository": "git@github.com:GabCostaSilva/desafio-contabil-frontend.git",
+  "description": "Aplicação de contabilidade para pequenas empresas.",
   "author": "Gabriel Costa <gabcostadeveloper@gmail.com>",
-  "license": "MIT"
+  "main": "public/electron.js",
+  "homepage": "./",
+  "build": {
+    "appId": "com.electron.contabilize",
+    "productName": "Contabilize",
+    "files": [
+      "node_modules/** /*",
+      "public/** /*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@fontsource/roboto": "^4.5.5",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/lab": "^5.0.0-alpha.81",
+    "@mui/material": "^5.6.3",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "node_modules/.bin/react-scripts start",
+    "build": "node_modules/.bin/react-scripts build",
+    "test": "node_modules/.bin/react-scripts test",
+    "eject": "node_modules/.bin/react-scripts eject",
+    "electron:start": "node_modules/.bin/concurrently -k \"cross-env BROWSER=none yarn start-client \" \" wait-on http://localhost:3000 && electronmon .\"",
+    "dist:dir": "electron-builder --dir",
+    "dist:mac": "yarn build && electron-builder -m",
+    "dist:win": "yarn build && electron-builder -w",
+    "dist:linux": "yarn build-client && electron-builder -l"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "browserslist": {
+    "production": [
+      "last 1 electron version"
+    ],
+    "development": [
+      "last 1 electron version"
+    ]
+  },
+  "electronVersion": "18.2.3",
+  "devDependencies": {
+    "electron": "18.2.3",
+    "electron-builder": "^23.0.3"
+  }
 }

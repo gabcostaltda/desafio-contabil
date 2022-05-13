@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost:8081/apollo/api`;
+const BASE_URL = `http://localhost:8081/contabilize/api`;
 
 const GET = async (path) => fetch(`${BASE_URL}${path}`);
 
