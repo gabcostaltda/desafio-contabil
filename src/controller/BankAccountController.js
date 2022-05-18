@@ -1,9 +1,9 @@
-import {GET, POST} from './BaseController'
-
 const BASE_PATH = "/contas-bancarias";
+let contabilizeApi = window.contabilizeApi;
 
-const getBankAccounts = () => GET(BASE_PATH)
+const BankAccountController = () => ({
+  getBankAccounts: contabilizeApi.obterContasBancarias,
+  createBankAccount: contabilizeApi.criarContaBancaria
+})
 
-const createBankAccount = (body) => POST(BASE_PATH, body)
-
-export {getBankAccounts, createBankAccount}
+export default BankAccountController()

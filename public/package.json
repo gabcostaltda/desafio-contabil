@@ -1,24 +1,23 @@
 {
-  "name": "@contabilize/server",
+  "name": "@contabilize/electron",
   "version": "1.0.0",
-  "description": "Server for Contabilize App",
+  "description": "Electron for Contabilize App",
   "main": "src/index.js",
   "author": "Gabriel Costa <gabcostadeveloper@gmail.com>",
   "license": "MIT",
   "private": true,
-  "type": "module",
   "repository": {
     "url": "git@github.com:GabCostaSilva/desafio-contabil-frontend.git"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "koa": "^2.13.4",
-    "koa-router": "^10.1.1",
     "sequelize": "^6.19.0",
     "sqlite3": "^5.0.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "prettier": "^2.6.2",
     "sequelize-cli": "^6.4.1"
   }
 }

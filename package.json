@@ -36,10 +36,14 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^7.1.0",
+    "cross-env": "^7.0.3",
+    "electronmon": "^2.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "wait-on": "^6.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -47,17 +51,11 @@
     "build": "node_modules/.bin/react-scripts build",
     "test": "node_modules/.bin/react-scripts test",
     "eject": "node_modules/.bin/react-scripts eject",
-    "electron:start": "node_modules/.bin/concurrently -k \"cross-env BROWSER=none yarn start-client \" \" wait-on http://localhost:3000 && electronmon .\"",
+    "electron:start": "node_modules/.bin/concurrently -k \"cross-env BROWSER=none yarn start \" \" wait-on http://localhost:3000 && electronmon .\"",
     "dist:dir": "electron-builder --dir",
     "dist:mac": "yarn build && electron-builder -m",
     "dist:win": "yarn build && electron-builder -w",
     "dist:linux": "yarn build-client && electron-builder -l"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "postinstall": "electron-builder install-app-deps",
   "browserslist": {
