@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
+const contabilizeApi = require("./contabilizeApi");
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -14,12 +15,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-contextBridge.exposeInMainWorld("contabilizeApi", {
-  asyncHello: async (args) => ipcRenderer.send("async-hello", args),
-  syncHello: (args) => ipcRenderer.sendSync("sync-hello", args),
-  obterContasBancarias: () => ipcRenderer.invoke("obterTodasContasBancarias"),
-  criarContaBancaria: (contaBancaria) => ipcRenderer.invoke("novaContaBancaria", contaBancaria)
-});
+contextBridge.exposeInMainWorld("contabilizeApi", contabilizeApi);
 
 // Async listeners
 ipcRenderer.once("contasObtidas", (event, contas) => contas);
