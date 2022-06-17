@@ -6,7 +6,6 @@ const {
 } = require("electron");
 const path = require("path");
 const url = require("url");
-const { initializeDatabase } = require("./src/index.js");
 const ipcMainAdapter = require('./ipcMainAdapter.js');
 
 function createWindow() {
@@ -56,7 +55,6 @@ function setupLocalFilesNormalizerProxy() {
 app.whenReady().then(() => {
   createWindow();
   setupLocalFilesNormalizerProxy();
-  initializeDatabase();
   app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.

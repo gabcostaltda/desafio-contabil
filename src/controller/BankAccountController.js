@@ -1,4 +1,3 @@
-const BASE_PATH = "/contas-bancarias";
 let contabilizeApi = window.contabilizeApi;
 
 const BankAccountController = () => ({
