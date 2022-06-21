@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
-const contabilizeApi = require("./contabilizeApi");
+const eventEmitters = require("./src/controllers/electron/events/emitters");
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-contextBridge.exposeInMainWorld("contabilizeApi", contabilizeApi);
+contextBridge.exposeInMainWorld("contabilizeApi", eventEmitters);
 
 // Async listeners
 ipcRenderer.once("contasObtidas", (event, contas) => contas);

@@ -3,7 +3,7 @@ const { conta_bancaria } = require("../../../src/core/models");
 const index = require("../../../src/core/models");
 const ContaBancariaBuilder = require("../../builder/ContaBancariaBuilder");
 const EntradaBuilder = require("../../builder/EntradaBuilder");
-const EntradaService = require("../../../src/service/EntradaService");
+const EntradaService = require("../../../src/application/EntradaService");
 
 describe("EntradaService", () => {
   beforeEach(async () => {

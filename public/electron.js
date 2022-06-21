@@ -6,7 +6,7 @@ const {
 } = require("electron");
 const path = require("path");
 const url = require("url");
-const ipcMainAdapter = require('./ipcMainAdapter.js');
+const ipcMainAdapter = require('./src/controllers/electron/events/listeners');
 
 function createWindow() {
   // Create the browser window.
