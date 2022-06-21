@@ -1,5 +1,6 @@
-import {ipcMain} from "electron";
-import {contaBancariaService} from "../../../../application";
+const {ipcMain} = require("electron");
+const {contaBancariaService} = require("../../../../application");
+
 
 ipcMain.handle("obterTodasContasBancarias",
     async (event) => await contaBancariaService.obterTodas());

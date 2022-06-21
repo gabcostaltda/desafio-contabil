@@ -12,7 +12,8 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "sequelize": "^6.19.0",
-    "sqlite3": "^5.0.8"
+    "sqlite3": "^5.0.8",
+    "umzug": "^3.1.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0 || ^8.2.0",

@@ -1,7 +1,7 @@
 const entradaEventEmitter = require("./EntradaEventEmitter")
-const contaBancariaEventEmmiter = require("./ContaBancariaEventEmitter")
+const contaBancariaEventEmitter = require("./ContaBancariaEventEmitter")
 
 module.exports = {
-    contaBancariaEventEmmiter,
+    contaBancariaEventEmitter,
     entradaEventEmitter
 }

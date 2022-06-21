@@ -7,5 +7,4 @@ ipcMain.handle("novaEntrada", async (event, entrada) => {
 });
 
 
-
 module.exports = ipcMain
