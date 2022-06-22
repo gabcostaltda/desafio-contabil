@@ -1,5 +1,5 @@
 import {Box, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
-import {AccountBalance, AttachMoney, Home, LocalShipping, Person} from "@mui/icons-material";
+import {AccountBalance, AttachMoney, Home, LocalShipping, Person, CurrencyExchange} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import paths from "../paths";
 
@@ -9,6 +9,7 @@ const MenuList = () => {
         {title: 'Cliente', icon: <Person/>, path: paths.customer},
         {title: 'Fornecedor', icon: <LocalShipping/>, path: paths.provider},
         {title: 'Contas', icon: <AccountBalance/>, path: paths.account},
+        {title: 'Movimentações', icon: <CurrencyExchange/>, path: paths.bank_transition},
         {title: 'Contas a pagar', icon: <AttachMoney/>, path: paths.bills},
     ];
     return <Box

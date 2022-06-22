@@ -2,6 +2,7 @@ import {Box, Button, Container, Link} from "@mui/material";
 import TopBar from "../../component/TopBar";
 import {useEffect, useState} from "react";
 import BankAccountController from "../../controller/BankAccountController";
+import {CurrencyExchange} from "@mui/icons-material";
 import CustomTable from "../../component/core/CustomTable";
 import paths from "../../paths";
 import {Link as RouterLink, Outlet, useLocation} from "react-router-dom";
@@ -27,6 +28,10 @@ const BankAccount = () => {
     }
 
     const rows = bankAccounts.map((bankAccount) => createData(bankAccount));
+
+    const actions = [
+        {icon: <CurrencyExchange/>, title: "Movimentacoes", description: "", path: ""}
+    ]
 
     const columns = [
         {id: "icone", label: "", minWidth: ""},

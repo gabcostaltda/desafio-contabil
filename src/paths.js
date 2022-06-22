@@ -3,7 +3,8 @@ const paths = {
     new_account: "/contas/nova-conta-bancaria",
     bills: "/contas-a-pagar",
     customer: "/clientes",
-    provider: "/fornecedores"
+    provider: "/fornecedores",
+    bank_transition: "/movimentacoes"
 };
 
 export default paths
