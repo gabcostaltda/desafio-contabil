@@ -1,7 +1,7 @@
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
 const CustomTable = ({columns, rows}) => (<Paper sx={{
-    width: '100%',
+    width: '95%',
     overflow: 'hidden',
     justifyContent: 'center'
 }}>

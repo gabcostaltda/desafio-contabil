@@ -1,28 +1,27 @@
 import {AppBar, Box, Grid, Typography} from "@mui/material";
-import AccountCard from "../component/core/bank_account/AccountCard";
-import BillsCard from "../component/core/BillsCard";
-import CustomerCard from "../component/core/CustomerCard";
-import ProviderCard from "../component/core/ProviderCard";
-import paths from "../paths";
-import TopBar from "../component/TopBar";
+import TopBar from "../component/structure/TopBar";
+import AccountMovementsListing from "../component/core/AccountMovementsListing";
+import TotalBalanceCard from "../component/core/TotalBalanceCard";
 
 const drawerWidth = 240;
 const Home = () =>
     <Box sx={{display: 'flex'}}>
         <TopBar title='Início'/>
-        <Grid container spacing={2}
+        <Grid container spacing={3}
               sx={{width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, mt: `64px`}}>
-            <Grid item xs={6}>
-                <AccountCard path={paths.account}/>
+            <Grid item xs={12}>
+                <Typography variant="h4">Olá, João.</Typography>
+            <Typography variant="body1" >
+               Aqui está seu resumo
+            </Typography>
             </Grid>
-            <Grid item xs={6}>
-                <BillsCard path={paths.bills}/>
+            <Grid item xs={12}>
             </Grid>
-            <Grid item xs={6}>
-                <CustomerCard path={paths.customer}/>
+            <Grid item xs={12}>
+                <TotalBalanceCard/>
             </Grid>
-            <Grid item xs={6}>
-                <ProviderCard path={paths.provider}/>
+            <Grid item xs={12}>
+                <AccountMovementsListing />
             </Grid>
         </Grid>
     </Box>

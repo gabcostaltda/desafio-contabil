@@ -13,7 +13,7 @@ import {
     Typography
 } from "@mui/material";
 import {useEffect, useReducer, useState} from "react";
-import TopBar from "../../component/TopBar";
+import TopBar from "../../component/structure/TopBar";
 import BankAccountController from "../../controller/BankAccountController";
 import {LoadingButton} from "@mui/lab";
 import {useNavigate} from "react-router-dom";

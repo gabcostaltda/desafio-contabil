@@ -1,7 +1,7 @@
 import {Box, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import {AccountBalance, AttachMoney, Home, LocalShipping, Person, CurrencyExchange} from "@mui/icons-material";
 import {Link} from "react-router-dom";
-import paths from "../paths";
+import paths from "../../paths";
 
 const MenuList = () => {
     const menuOptions = [

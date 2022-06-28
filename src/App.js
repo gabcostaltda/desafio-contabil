@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import Home from "./view/Home";
-import SideMenu from "./component/SideMenu";
+import SideMenu from "./component/structure/SideMenu";
 import {Box} from "@mui/material";
 import './App.css'
 import paths from "./paths";

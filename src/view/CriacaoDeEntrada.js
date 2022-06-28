@@ -1,4 +1,4 @@
-import TopBar from "../component/TopBar";
+import TopBar from "../component/structure/TopBar";
 import {Container, FormControl, Grid, InputLabel} from "@mui/material";
 
 const CriacaoDeEntrada = () => {
