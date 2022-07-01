@@ -10,7 +10,7 @@ const Home = () =>
         <Grid container spacing={3}
               sx={{width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, mt: `64px`}}>
             <Grid item xs={12}>
-                <Typography variant="h4">Olá, João.</Typography>
+                <Typography variant="h4">Olá, Fabiano.</Typography>
             <Typography variant="body1" >
                Aqui está seu resumo
             </Typography>
