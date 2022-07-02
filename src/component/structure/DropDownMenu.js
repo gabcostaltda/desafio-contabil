@@ -1,9 +1,34 @@
 import {Button, Menu, MenuItem} from "@mui/material";
-import {useState} from "react";
+import {useState, createElement} from "react";
+import {NewAccountIncome} from "../../view/NewAccountIncome";
+import ModalForm from "./ModalForm";
+import {Link} from "react-router-dom";
+import paths from "../../paths";
 
 
-const DropDownMenu = ({title, menuItems}) => {
+// [
+// (): ModalForm => (<ModalForm dialogContentText={"Cadastre uma nova entrada"}
+//                              dialogTitle={"Nova Entrada"}
+//                              handleClickClose={handleModalClose}
+//                              isOpen={modalOpen}/>),
+//     (): ModalForm => (<ModalForm dialogContentText={"Cadastre uma nova saída"}
+//                                  dialogTitle={"Nova Saída"}
+//                                  handleClickClose={handleModalClose}
+//                                  isOpen={modalOpen}/>),
+//     (): ModalForm => (<ModalForm dialogContentText={"Cadastre uma nova transferência"}
+//                                  dialogTitle={"Nova Transferência"}
+//                                  handleClickClose={handleModalClose}
+//                                  isOpen={modalOpen}/>),
+// ]
+
+type DropDownMenuParameters = { title: string, menuItems: Array<string> }
+
+const DropDownMenu = (menuParameters: DropDownMenuParameters) => {
+    const {title, menuItems} = menuParameters
     const [anchorEl, setAnchorEl] = useState(null);
+    const [openDialogName, setOpenDialog] = useState("Entrada");
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -14,6 +39,11 @@ const DropDownMenu = ({title, menuItems}) => {
         setAnchorEl(null);
     };
 
+    const openModal = (modalToOpen: String) => {
+        setOpenDialog(modalToOpen)
+        handleClose()
+        setIsModalOpen(true)
+    }
     return (
         <div>
             <Button
@@ -36,9 +66,14 @@ const DropDownMenu = ({title, menuItems}) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-
                 {menuItems && menuItems
-                    .map(menuItem => (<MenuItem onClick={handleClose}>{menuItem.title}</MenuItem>))}
+                    .map(menuItem => (<MenuItem component={Link}
+                                                to={paths.new_income}
+                                                className='link'
+                                                key={menuItem}
+                                                onClick={() => openModal(menuItem)}>
+                        {menuItem}
+                    </MenuItem>))}
             </Menu>
         </div>
     );

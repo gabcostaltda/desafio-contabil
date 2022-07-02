@@ -1,0 +1,12 @@
+//@flow
+import {SubmissionForm} from "./SubmissionForm"
+
+declare export function ModalFormType(
+    title: string,
+    dialogTitle: string,
+    dialogContentText: string,
+    submissionForm: SubmissionForm,
+    handleClickOpen: function,
+    handleClickClose: function,
+    isOpen: boolean
+)

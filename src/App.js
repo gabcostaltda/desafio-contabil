@@ -10,6 +10,7 @@ import Customer from "./view/Customer";
 import Provider from "./view/Provider";
 import NewBankAccount from "./view/bank_account/NewBankAccount";
 import BankTransition from "./view/BankTransition";
+import {NewAccountIncome} from "./view/NewAccountIncome";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                 <Route path={paths.bills} element={<Bills/>}/>
                 <Route path={paths.customer} element={<Customer/>}/>
                 <Route path={paths.provider} element={<Provider/>}/>
+                <Route path={paths.new_income} element={<NewAccountIncome/>}/>
                 <Route path={"/"} index element={<Home/>}/>
             </Routes>
         </Box>

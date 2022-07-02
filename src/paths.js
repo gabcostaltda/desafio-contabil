@@ -4,7 +4,8 @@ const paths = {
     bills: "/contas-a-pagar",
     customer: "/clientes",
     provider: "/fornecedores",
-    bank_transition: "/movimentacoes"
+    bank_transition: "/movimentacoes",
+    new_income: "/nova-entrada"
 };
 
 export default paths
