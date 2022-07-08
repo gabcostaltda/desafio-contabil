@@ -11,23 +11,31 @@ import Provider from "./view/Provider";
 import NewBankAccount from "./view/bank_account/NewBankAccount";
 import BankTransition from "./view/BankTransition";
 import {NewAccountIncome} from "./view/NewAccountIncome";
+import {ThemeProvider} from "@mui/material";
+import {appTheme} from "./appTheme";
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 
 function App() {
 
     return (
-        <Box>
-            <SideMenu/>
-            <Routes>
-                <Route path={paths.account} element={<BankAccount/>}/>
-                <Route path={paths.new_account} element={<NewBankAccount/>}/>
-                <Route path={paths.bank_transition} element={<BankTransition/>}/>
-                <Route path={paths.bills} element={<Bills/>}/>
-                <Route path={paths.customer} element={<Customer/>}/>
-                <Route path={paths.provider} element={<Provider/>}/>
-                <Route path={paths.new_income} element={<NewAccountIncome/>}/>
-                <Route path={"/"} index element={<Home/>}/>
-            </Routes>
-        </Box>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <ThemeProvider theme={appTheme}>
+                <Box>
+                    <SideMenu/>
+                    <Routes>
+                        <Route path={paths.account} element={<BankAccount/>}/>
+                        <Route path={paths.new_account} element={<NewBankAccount/>}/>
+                        <Route path={paths.bank_transition} element={<BankTransition/>}/>
+                        <Route path={paths.bills} element={<Bills/>}/>
+                        <Route path={paths.customer} element={<Customer/>}/>
+                        <Route path={paths.provider} element={<Provider/>}/>
+                        <Route path={paths.new_income} element={<NewAccountIncome/>}/>
+                        <Route path={"/"} index element={<Home/>}/>
+                    </Routes>
+                </Box>
+            </ThemeProvider>
+        </LocalizationProvider>
     );
 }
 

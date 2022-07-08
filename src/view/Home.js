@@ -8,7 +8,7 @@ const Home = () =>
     <Box sx={{display: 'flex'}}>
         <TopBar title='Início'/>
         <Grid container spacing={3}
-              sx={{width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, mt: `64px`}}>
+              sx={{width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, mt: `0px`}}>
             <Grid item xs={12}>
                 <Typography variant="h4">Olá, Fabiano.</Typography>
             <Typography variant="body1" >

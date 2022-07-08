@@ -168,7 +168,7 @@ const NewBankAccount = () => {
                        spacing={2}
                        justifyContent="center">
                     <Button color="primary" variant="outlined">Voltar</Button>
-                    <LoadingButton color="success"
+                    <LoadingButton color="primary"
                                    loading={submitting}
                                    variant="contained"
                                    loadingIndicator="Salvando..."
