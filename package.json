@@ -68,12 +68,12 @@
       "last 1 electron version"
     ]
   },
-  "electronVersion": "18.2.3",
+  "electronVersion": "19.0.0",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
-    "electron": "18.2.3",
+    "electron": "19.0.0",
     "electron-builder": "^23.0.3",
     "electronmon": "^2.0.2",
     "flow-bin": "^0.181.2"

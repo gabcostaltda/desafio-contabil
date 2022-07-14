@@ -42,7 +42,7 @@ export const NewAccountIncome: SubmissionForm = () => {
 
     const [formState, setFormState] = useState({
         incomeValue: initialIncomeValueState,
-        incomeDate: formatInTimeZone(new Date(), TIME_ZONE, "dd-MM-yyyy"),
+        incomeDate: new Date(),
         incomeType: {}
     })
 
@@ -56,19 +56,9 @@ export const NewAccountIncome: SubmissionForm = () => {
         })();
     }, []);
 
-    const onSubmit = (submissionData) => {
-
-        const {incomeValue, incomeDate } = submissionData;
-
-        const incomeDateUtc = zonedTimeToUtc(incomeDate, TIME_ZONE);
-
-        const requestData = {
-            valor: textToCurrencyString(incomeValue),
-            data: formatInTimeZone(incomeDateUtc, TIME_ZONE, "dd-MM-yyyy"),
-            transacao: formState.incomeType
-        }
-
-        console.log("formRequest", requestData);
+    function onSubmit () {
+        console.dir(formState)
+        console.log("formRequest", formState);
     }
 
     function handleChange(changeProps) {
