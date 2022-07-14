@@ -9,7 +9,7 @@ import Bills from "./view/Bills";
 import Customer from "./view/Customer";
 import Provider from "./view/Provider";
 import NewBankAccount from "./view/bank_account/NewBankAccount";
-import BankTransition from "./view/BankTransition";
+import BankTransaction from "./view/BankTransaction";
 import {NewAccountIncome} from "./view/NewAccountIncome";
 import {ThemeProvider} from "@mui/material";
 import {appTheme} from "./appTheme";
@@ -26,7 +26,7 @@ function App() {
                     <Routes>
                         <Route path={paths.account} element={<BankAccount/>}/>
                         <Route path={paths.new_account} element={<NewBankAccount/>}/>
-                        <Route path={paths.bank_transition} element={<BankTransition/>}/>
+                        <Route path={paths.bank_transition} element={<BankTransaction/>}/>
                         <Route path={paths.bills} element={<Bills/>}/>
                         <Route path={paths.customer} element={<Customer/>}/>
                         <Route path={paths.provider} element={<Provider/>}/>

@@ -1,9 +1,9 @@
 import {Container} from "@mui/material";
 import TopBar from "../component/structure/TopBar";
 
-const BankTransition = () => (<Container maxWidth="sm">
+const BankTransaction = () => (<Container maxWidth="sm">
     <TopBar title='Movimentações'/>
 
 </Container>)
 
-export default BankTransition
+export default BankTransaction

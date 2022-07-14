@@ -1,4 +1,4 @@
-const {conta_bancaria} = require("../core/models");
+const {conta_bancaria} = require("../entity");
 
 module.exports = function ContaBancariaService() {
     this.obterEntradas = async (contaBancariaId) => {

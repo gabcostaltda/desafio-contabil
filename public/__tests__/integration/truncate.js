@@ -1,4 +1,4 @@
-const { sequelize } = require("../../src/core/models");
+const { sequelize } = require("../../src/core/entity");
 
 module.exports = () =>
   Promise.all(

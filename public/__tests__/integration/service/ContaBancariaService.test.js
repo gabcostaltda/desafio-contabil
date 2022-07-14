@@ -1,9 +1,9 @@
 const ContaBancariaBuilder = require("../../builder/ContaBancariaBuilder");
 const EntradaBuilder = require("../../builder/EntradaBuilder");
-const EntradaService = require("../../../src/application/EntradaService");
-const {conta_bancaria} = require("../../../src/core/models");
+const EntradaService = require("../../../src/core/service/EntradaService");
+const {conta_bancaria} = require("../../../src/core/entity");
 const truncate = require("../truncate");
-const {contaBancariaService} = require("../../../src/application");
+const {contaBancariaService} = require("../../../src/core/service");
 
 describe("ContaBancariaService", () => {
     beforeEach(async () => {

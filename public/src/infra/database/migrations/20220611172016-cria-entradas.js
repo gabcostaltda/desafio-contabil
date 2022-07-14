@@ -1,5 +1,5 @@
 "use strict";
-const tiposDeTransacao = require("../../core/enum/TipoDeTransacao");
+const tiposDeTransacao = require("../../../core/enum/TipoDeTransacao");
 
 module.exports = {
   async up(queryInterface, Sequelize) {

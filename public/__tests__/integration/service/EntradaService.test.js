@@ -1,9 +1,9 @@
 const truncate = require("../truncate");
-const { conta_bancaria } = require("../../../src/core/models");
-const index = require("../../../src/core/models");
+const { conta_bancaria } = require("../../../src/core/entity");
+const index = require("../../../src/core/entity");
 const ContaBancariaBuilder = require("../../builder/ContaBancariaBuilder");
 const EntradaBuilder = require("../../builder/EntradaBuilder");
-const EntradaService = require("../../../src/application/EntradaService");
+const EntradaService = require("../../../src/core/service/EntradaService");
 
 describe("EntradaService", () => {
   beforeEach(async () => {
@@ -38,6 +38,7 @@ describe("EntradaService", () => {
     );
 
     let entradasDaConta = await contaComSaldoIncrementado.getEntradas();
+
     expect(contaComSaldoIncrementado.saldo).toBe(200.0);
     expect(entradasDaConta.map((e) => e.id)).toContainEqual(entradaCriada.id);
     expect(entradaCriada).not.toBe(null);
@@ -45,4 +46,14 @@ describe("EntradaService", () => {
     expect(entradaCriada.id).not.toBe(undefined);
     expect(entradaCriada.id).not.toBe(null);
   });
+
+  it("Deve listar os tipos disponiveis de entradas", async () => {
+    const entradaService = new EntradaService();
+
+    const tipos = await entradaService.obterTiposDeEntrada();
+
+    expect(tipos).not.toBe(null);
+    expect(tipos).not.toBe(undefined);
+    expect(tipos.length).toBe(4);
+  })
 });

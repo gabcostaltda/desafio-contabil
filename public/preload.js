@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
-const eventEmitters = require("./src/controllers/electron/events/emitters");
+const eventEmitters = require("./src/controller/electron/emitters");
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.

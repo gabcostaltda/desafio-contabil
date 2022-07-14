@@ -6,7 +6,7 @@ const {
 } = require("electron");
 const path = require("path");
 const url = require("url");
-const ipcMainAdapter = require('./src/controllers/electron/events/listeners');
+const ipcMainAdapter = require('./src/controller/electron/listeners');
 const {runMigrations} = require("./src/app");
 
 function createWindow() {

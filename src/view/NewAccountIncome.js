@@ -6,53 +6,75 @@ import {
     Grid,
     Input,
     InputAdornment,
-    InputLabel, MenuItem, Select,
+    InputLabel,
+    MenuItem,
+    Select,
     Typography
 } from "@mui/material";
 import TopBar from "../component/structure/TopBar";
 import type {SubmissionForm} from "../component/structure/SubmissionForm";
 import {useForm} from 'react-hook-form';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import textToCurrencyString from "../textToCurrencyString";
 import {DesktopDatePicker} from "@mui/x-date-pickers";
 import TextField from "@mui/material/TextField";
+import {formatInTimeZone, zonedTimeToUtc} from "date-fns-tz"
+import EntradaController from "../controller/EntradaController";
+
+const TIME_ZONE = new Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export const NewAccountIncome: SubmissionForm = () => {
-    const {register, handleSubmit, formState: {errors}, setValue} = useForm();
     const initialIncomeValueState = "0,00";
-    setValue("incomeValue", initialIncomeValueState);
-    setValue("incomeDate", new Date())
+    const {
+        register,
+        handleSubmit,
+        isDirty,
+        isValid,
+        formState: {errors},
+        setValue
+    } = useForm({
+        defaultValues: {
+            incomeValue: initialIncomeValueState,
+            incomeDate: new Date(),
+            incomeType: {}
+        }
+    });
+
     const [formState, setFormState] = useState({
         incomeValue: initialIncomeValueState,
-        incomeDate: new Date(),
-        incomeType: "cash"
-
+        incomeDate: formatInTimeZone(new Date(), TIME_ZONE, "dd-MM-yyyy"),
+        incomeType: {}
     })
 
-    const handleIncomeTypeChange = (e) => {
-        setFormState({
-            ...formState,
-            incomeType: e.target.value
-        })
+    const [incomeTypes, setIncomeTypes] = useState([{}]);
+    useEffect(() => {
+        (async () => {
+            const incomeTypes = await EntradaController.getTiposDeEntrada();
+
+            setIncomeTypes(incomeTypes);
+            setFormState({...formState, incomeType: incomeTypes[0]});
+        })();
+    }, []);
+
+    const onSubmit = (submissionData) => {
+
+        const {incomeValue, incomeDate } = submissionData;
+
+        const incomeDateUtc = zonedTimeToUtc(incomeDate, TIME_ZONE);
+
+        const requestData = {
+            valor: textToCurrencyString(incomeValue),
+            data: formatInTimeZone(incomeDateUtc, TIME_ZONE, "dd-MM-yyyy"),
+            transacao: formState.incomeType
+        }
+
+        console.log("formRequest", requestData);
     }
 
-    const handleDateChange = (newDate) => {
+    function handleChange(changeProps) {
         setFormState({
             ...formState,
-            "incomeDate": newDate
-        });
-
-    };
-
-    const onSubmit = ({incomeValue}) => {
-        console.log(...formState)
-        console.log("YOU SENT ME!", parseFloat(incomeValue.replace(",", ".")));
-    }
-
-    function handleChange(e) {
-        setFormState({
-            ...formState,
-            "incomeValue": textToCurrencyString(e.target.value)
+            ...changeProps
         })
     }
 
@@ -66,14 +88,14 @@ export const NewAccountIncome: SubmissionForm = () => {
                 alignItems: "baseline"
             }}>
             <TopBar title="Nova Entrada"/>
-            <form onSubmit={handleSubmit(onSubmit, (errors, e) => console.log(errors, e))}>
+            <form onSubmit={handleSubmit(onSubmit, (errors, e) => console.error(errors, e))}>
                 <Grid container
                       rowSpacing={4}
                       columnSpacing={2}
                       direction="row"
                       justifyContent="flex-start"
                       alignItems="baseline">
-                    <Grid container columnSpacing={4} item xs={12}  alignItems="baseline">
+                    <Grid container columnSpacing={4} item xs={12} alignItems="baseline">
                         <Grid item xs={3}>
                             <FormControl>
                                 <InputLabel error={Boolean(errors.incomeValue)}>
@@ -88,7 +110,7 @@ export const NewAccountIncome: SubmissionForm = () => {
                                         </InputAdornment>
                                     }
                                     value={formState.incomeValue}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange({incomeValue: textToCurrencyString(e.target.value)})}
                                     required={true}/>
                                 {errors.incomeValue
                                     && <FormHelperText error={Boolean(errors.incomeValue)}>
@@ -98,50 +120,80 @@ export const NewAccountIncome: SubmissionForm = () => {
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Tipo de entrada</InputLabel>
+                                <InputLabel id="income-type-label">Tipo de entrada</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={formState.incomeType}
+                                    labelId="income-type-label"
+                                    id="income-type"
+                                    value={formState.incomeType === undefined
+                                        ? ""
+                                        : formState.incomeType.chave === undefined
+                                            ? ""
+                                            : formState.incomeType.chave}
                                     label="Tipo de entrada"
-                                    onChange={handleIncomeTypeChange}
+                                    onChange={(e) => handleChange({
+                                        incomeType: incomeTypes.find(i => i.chave === e.target.value)
+                                    })}
+                                    name="incomeType"
                                 >
-                                    <MenuItem value={"debit"}>Débito</MenuItem>
-                                    <MenuItem value={"credit"}>Crédito</MenuItem>
-                                    <MenuItem value={"cash"}>Dinheiro</MenuItem>
+                                    {incomeTypes && incomeTypes
+                                        .map((incomeType) => <MenuItem key={incomeType.chave}
+                                                                       value={incomeType.chave}>{incomeType.nome}
+                                            </MenuItem>
+                                        )
+                                    }
                                 </Select>
                             </FormControl>
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl>
                                 <DesktopDatePicker
+                                    name="incomeDate"
                                     label="Data da entrada"
                                     inputFormat="MM/dd/yyyy"
                                     value={formState.incomeDate}
-                                    onChange={handleDateChange}
+                                    onChange={(e) => handleChange({incomeDate: e})}
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </FormControl>
                         </Grid>
                     </Grid>
-                    <Grid container item xs={12}>
-                        <Grid item xs={4}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Conta de destino</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={formState.incomeType}
-                                    label="Conta de destino"
-                                    onChange={handleIncomeTypeChange}
-                                >
-                                    <MenuItem value={"debit"}>Débito</MenuItem>
-                                    <MenuItem value={"credit"}>Crédito</MenuItem>
-                                    <MenuItem value={"cash"}>Dinheiro</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                    </Grid>
+                    {/* TODO bank accounts select
+                    <Grid container item xs={12}>*/
+                    }
+                    {/*    <Grid item xs={4}>*/
+                    }
+                    {/*        <FormControl fullWidth>*/
+                    }
+                    {/*            <InputLabel id="demo-simple-select-label">Conta de destino</InputLabel>*/
+                    }
+                    {/*            <Select*/
+                    }
+                    {/*                labelId="demo-simple-select-label"*/
+                    }
+                    {/*                id="demo-simple-select"*/
+                    }
+                    {/*                value={formState.incomeType}*/
+                    }
+                    {/*                label="Conta de destino"*/
+                    }
+                    {/*                onChange={(e) => handleChange({incomeType: e.target.value})}*/
+                    }
+                    {/*            >*/
+                    }
+                    {/*                <MenuItem value={"debit"}>Débito</MenuItem>*/
+                    }
+                    {/*                <MenuItem value={"credit"}>Crédito</MenuItem>*/
+                    }
+                    {/*                <MenuItem value={"cash"}>Dinheiro</MenuItem>*/
+                    }
+                    {/*            </Select>*/
+                    }
+                    {/*        </FormControl>*/
+                    }
+                    {/*    </Grid>*/
+                    }
+                    {/*</Grid>*/
+                    }
                     <Grid container item xs={12} sx={{justifyContent: "flex-end"}}>
                         <Grid item xs={3}>
                             <FormControl>

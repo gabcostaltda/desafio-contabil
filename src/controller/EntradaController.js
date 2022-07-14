@@ -1,8 +1,9 @@
-let contabilizeApi = window.contabilizeApi;
+const {entradaEventEmitter} = window.contabilizeApi;
 
 const EntradaController = () => ({
-    getEntradas: contabilizeApi.obterEntradasDaConta,
-    criarEntrada: contabilizeApi.criarEntrada
+    getEntradas: entradaEventEmitter.obterEntradasDaConta,
+    criarEntrada: entradaEventEmitter.criarEntrada,
+    getTiposDeEntrada: entradaEventEmitter.obterTiposDeEntrada,
 })
 
 export default EntradaController();

@@ -1,5 +1,5 @@
 const {Umzug, SequelizeStorage} = require("umzug")
-const {sequelize, Sequelize} = require("./core/models")
+const {sequelize, Sequelize} = require("./core/entity")
 
 const umzug = new Umzug({
     migrations: {

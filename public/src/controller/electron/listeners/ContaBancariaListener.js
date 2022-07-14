@@ -1,5 +1,5 @@
 const {ipcMain} = require("electron");
-const {contaBancariaService} = require("../../../../application");
+const {contaBancariaService} = require("../../../core/service");
 
 
 ipcMain.handle("obterTodasContasBancarias",
