@@ -18,10 +18,8 @@ import {useEffect, useState} from "react";
 import textToCurrencyString from "../textToCurrencyString";
 import {DesktopDatePicker} from "@mui/x-date-pickers";
 import TextField from "@mui/material/TextField";
-import {formatInTimeZone, zonedTimeToUtc} from "date-fns-tz"
 import EntradaController from "../controller/EntradaController";
 
-const TIME_ZONE = new Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export const NewAccountIncome: SubmissionForm = () => {
     const initialIncomeValueState = "0,00";
@@ -59,6 +57,8 @@ export const NewAccountIncome: SubmissionForm = () => {
     function onSubmit () {
         console.dir(formState)
         console.log("formRequest", formState);
+
+        EntradaController.criarEntrada({})
     }
 
     function handleChange(changeProps) {

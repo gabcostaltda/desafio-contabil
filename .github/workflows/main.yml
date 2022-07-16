@@ -2,7 +2,7 @@ name: CI
 on: push
 defaults:
  run:
-  working-directory: ./public
+  working-directory: ./electron
 jobs:
   build:
     runs-on: ubuntu-latest
