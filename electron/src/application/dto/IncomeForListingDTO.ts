@@ -1,4 +1,4 @@
-import {BankAccountForIncomeListingDTO} from "./BankAccountForListingDTO";
+import {BankAccountForIncomeListingDTO} from "./BankAccountForIncomeListingDTO";
 
 export class IncomeForListingDTO {
 

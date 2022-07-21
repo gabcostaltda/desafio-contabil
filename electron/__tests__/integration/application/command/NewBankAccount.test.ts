@@ -4,6 +4,9 @@ import {NewBankAccount} from "../../../../src/application/command/NewBankAccount
 import {NewBankAccountDTO} from "../../../../src/application/dto/NewBankAccountDTO";
 
 describe("New Bank Account Tests", () => {
+    beforeEach(async () => {
+        await AppDataSource.synchronize(true)
+    })
 
     it('should create a new bank account', async function () {
         const newBankAccount = new NewBankAccount(AppDataSource.getRepository(BankAccount));

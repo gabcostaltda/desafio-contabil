@@ -1,7 +1,7 @@
 import {Repository} from "typeorm";
 import {BankAccount} from "../../core/entity";
 import {IncomeForListingDTO} from "../dto/IncomeForListingDTO";
-import {BankAccountForIncomeListingDTO} from "../dto/BankAccountForListingDTO";
+import {BankAccountForIncomeListingDTO} from "../dto/BankAccountForIncomeListingDTO";
 import {BusinessException} from "../../core/exception/BusinessException";
 
 export class BankAccountTransactionQuery {
