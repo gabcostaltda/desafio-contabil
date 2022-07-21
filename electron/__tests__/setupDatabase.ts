@@ -4,4 +4,6 @@ beforeAll(async () => AppDataSource
     .initialize()
     .then((conn) => {
         console.info("Database initialized");
-    }).catch(error => console.log(error)))
+        return conn;
+    })
+    .catch(error => console.log(error)))

@@ -26,8 +26,8 @@ export class Income {
     date: Date;
 
     @Column()
-    type: String;
-z
+    type: string;
+
     @ManyToOne(type => BankAccount, bankAccount => bankAccount.incomes)
     @JoinColumn({name: "bank_account_id", referencedColumnName: "id"})
     bankAccount: BankAccount;
