@@ -1,31 +1,43 @@
 {
-  "name": "@desafio-contabil/electron",
-  "version": "1.0.0",
-  "description": "Electron for Desafio Contabil App",
-  "main": "src/app.js",
-  "author": "Gabriel Costa <gabcostadeveloper@gmail.com>",
-  "license": "MIT",
-  "private": true,
-  "repository": {
-    "url": "git@github.com:GabCostaSilva/desafio-contabil-frontend.git"
-  },
-  "dependencies": {
-    "dotenv": "^16.0.1",
-    "sequelize": "^6.19.0",
-    "sqlite3": "^5.0.8",
-    "umzug": "^3.1.1"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0 || ^8.2.0",
-    "jest": "^28.1.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "prettier": "^2.6.2",
-    "sequelize-cli": "^6.4.1"
-  },
-  "scripts": {
-    "pretest": "NODE_ENV=test sequelize db:migrate",
-    "test": "NODE_ENV=test jest",
-    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
-  }
+   "name": "@desafio-contabil/electron",
+   "version": "1.0.0",
+   "description": "Electron for Desafio Contabil App",
+   "main": "src/app.js",
+   "author": "Gabriel Costa <gabcostadeveloper@gmail.com>",
+   "license": "MIT",
+   "private": true,
+   "repository": {
+      "url": "git@github.com:GabCostaSilva/desafio-contabil-frontend.git"
+   },
+   "dependencies": {
+      "dotenv": "^16.0.1",
+      "reflect-metadata": "^0.1.13",
+      "sequelize": "^6.19.0",
+      "sqlite3": "^5.0.2",
+      "typeorm": "0.3.7",
+      "umzug": "^3.1.1"
+   },
+   "devDependencies": {
+      "@types/jest": "^28.1.6",
+      "@types/node": "^16.11.10",
+      "eslint": "^7.32.0 || ^8.2.0",
+      "eslint-config-airbnb-base": "^15.0.0",
+      "eslint-plugin-import": "^2.25.2",
+      "jest": "^28.1.3",
+      "prettier": "^2.6.2",
+      "sequelize-cli": "^6.4.1",
+      "sinon": "^14.0.0",
+      "ts-jest": "^28.0.6",
+      "ts-node": "10.7.0",
+      "typescript": "4.5.2"
+   },
+   "scripts": {
+      "typeorm": "node ./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js -d src/datasource.config.ts",
+      "migration:up": "node ./node_modules/.bin/ts-node --project tsconfig.json ./node_modules/.bin/typeorm migration:run -d src/migration.config.ts",
+      "migration:down": "node ./node_modules/.bin/ts-node --project tsconfig.json ./node_modules/.bin/typeorm migration:revert -d src/migration.config.ts",
+      "pretest": "NODE_ENV=test yarn run migration:up",
+      "test": "NODE_ENV=test jest",
+      "posttest": "NODE_ENV=test yarn run migration:down",
+      "start": "ts-node src/index.ts"
+   }
 }

@@ -1,5 +1,12 @@
+import {AppDataSource} from "./data-source";
+import "reflect-metadata"
+
 const {Umzug, SequelizeStorage} = require("umzug")
 const {sequelize, Sequelize} = require("./core/entity")
+
+AppDataSource.initialize().then(async () => {
+
+}).catch(error => console.log(error))
 
 const umzug = new Umzug({
     migrations: {

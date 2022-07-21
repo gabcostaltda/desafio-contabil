@@ -1,6 +1,6 @@
-node_modules
-data
-dist
-build
-__tests__/coverage/
-*.sqlite
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/

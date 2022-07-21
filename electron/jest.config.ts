@@ -2,8 +2,9 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
+import type {Config} from "@jest/types";
 
-module.exports = {
+const config: Config.InitialOptions = {
     // All imported modules in your tests should be mocked automatically
     // automock: false,
 
@@ -17,7 +18,7 @@ module.exports = {
     clearMocks: true,
 
     // Indicates whether the coverage information should be collected while executing the test
-    collectCoverage: true,
+    collectCoverage: false,
 
     // An array of glob patterns indicating a set of files for which coverage information should be collected
     collectCoverageFrom: ["src/**", "!src/database/migrations/**", "!src/config/**"],
@@ -135,7 +136,7 @@ module.exports = {
     // setupFiles: [],
 
     // A list of paths to modules that run some code to configure or set up the testing framework before each test
-    // setupFilesAfterEnv: [],
+    setupFilesAfterEnv: ['<rootDir>/__tests__/setupDatabase.ts'],
 
     // The number of seconds after which a test is considered as slow and reported as such in the results.
     // slowTestThreshold: 5,
@@ -155,7 +156,10 @@ module.exports = {
     // The glob patterns Jest uses to detect test files
     testMatch: [
         "**/__tests__/**/*.test.[jt]s?(x)",
-        "**/?(*.)+(spec|test).[tj]s?(x)"
+        "**/?(*.)+(spec|test).[tj]s?(x)",
+        '!**/__tests__/coverage/**',
+        '!**/__tests__/utils/**',
+        '!**/__tests__/images/**'
     ],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -173,7 +177,9 @@ module.exports = {
     // testRunner: "jest-circus/runner",
 
     // A map from regular expressions to paths to transformers
-    // transform: undefined,
+    transform: {
+        "^.+\\.tsx?$": "ts-jest"
+    },
 
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
     // transformIgnorePatterns: [
@@ -193,3 +199,5 @@ module.exports = {
     // Whether to use watchman for file crawling
     // watchman: true,
 };
+
+export default config;
