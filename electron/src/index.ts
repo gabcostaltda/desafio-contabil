@@ -1,8 +1,14 @@
 import {AppDataSource} from "./data-source"
 
-/*TODO: create queries */
-AppDataSource.initialize().then(async () => {
+const initializeApplication = () => {
+    AppDataSource
+        .initialize()
+        .then(async (dataSource) => {
 
-    console.log("Here you can setup and run express / fastify / any other framework.")
+            await dataSource.runMigrations()
+            console.info(":::: Migrations executed ::::")
 
-}).catch(error => console.log(error))
+        }).catch(error => console.error(error))
+}
+
+export default initializeApplication

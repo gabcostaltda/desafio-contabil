@@ -18,7 +18,7 @@ import {useEffect, useState} from "react";
 import textToCurrencyString from "../textToCurrencyString";
 import {DesktopDatePicker} from "@mui/x-date-pickers";
 import TextField from "@mui/material/TextField";
-import EntradaController from "../controller/EntradaController";
+import EntradaController from "../controller/TransactionController";
 
 
 export const NewAccountIncome: SubmissionForm = () => {
@@ -47,7 +47,7 @@ export const NewAccountIncome: SubmissionForm = () => {
     const [incomeTypes, setIncomeTypes] = useState([{}]);
     useEffect(() => {
         (async () => {
-            const incomeTypes = await EntradaController.getTiposDeEntrada();
+            const incomeTypes = await EntradaController.listTransactionTypes();
 
             setIncomeTypes(incomeTypes);
             setFormState({...formState, incomeType: incomeTypes[0]});
@@ -58,7 +58,7 @@ export const NewAccountIncome: SubmissionForm = () => {
         console.dir(formState)
         console.log("formRequest", formState);
 
-        EntradaController.criarEntrada({})
+        EntradaController.createIncome({})
     }
 
     function handleChange(changeProps) {

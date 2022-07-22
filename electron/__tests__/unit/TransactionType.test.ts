@@ -15,4 +15,16 @@ describe("TransactionType tests", () => {
         expect(TransactionType.getValue("TRANSFER")).toBe("Transferência");
         expect(TransactionType.getValue("DEBIT")).toBe("Débito");
     });
+
+    it("should return the list of the transaction types", () => {
+        const list = TransactionType.list();
+
+        expect(list).not.toBeNull();
+        expect(list).toStrictEqual({
+            'CREDIT': 'Crédito',
+            'CASH': 'Dinheiro',
+            'TRANSFER': 'Transferência',
+            'DEBIT': 'Débito'
+        });
+    })
 })

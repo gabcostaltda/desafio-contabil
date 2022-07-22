@@ -1,8 +1,8 @@
-const {contaBancariaEventEmitter} = window.contabilizeApi;
+const {BankAccountEvents} = window.contabilizeApi;
 
 const BankAccountController = () => ({
-  getBankAccounts: contaBancariaEventEmitter.obterContasBancarias,
-  createBankAccount: contaBancariaEventEmitter.criarContaBancaria
+  getBankAccounts: BankAccountEvents.getBankAccounts,
+  createBankAccount: BankAccountEvents.createBankAccount
 })
 
 export default BankAccountController()

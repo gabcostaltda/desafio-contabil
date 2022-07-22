@@ -1,5 +1,5 @@
-const contaBancariaListener = require("./ContaBancariaListener");
-const entradaListener = require("./EntradaListener");
+const contaBancariaListener = require("./BankAccountListener");
+const entradaListener = require("./BankAccountIncomeListener");
 
 module.exports = {
     contaBancariaListener,

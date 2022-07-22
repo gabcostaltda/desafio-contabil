@@ -7,7 +7,7 @@ const {
 const path = require("path");
 const url = require("url");
 const ipcMainAdapter = require('./src/controller/electron/listeners');
-const {runMigrations} = require("./src/app");
+import initializeApplication from "./src/";
 
 function createWindow() {
     // Create the browser window.
@@ -57,7 +57,7 @@ app.whenReady()
     .then(async () => {
         createWindow();
         setupLocalFilesNormalizerProxy();
-        await runMigrations();
+        initializeApplication();
         app.on("activate", () => {
             // On macOS it's common to re-create a window in the app when the
             // dock icon is clicked and there are no other windows open.

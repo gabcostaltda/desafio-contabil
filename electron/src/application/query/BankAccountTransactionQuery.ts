@@ -3,6 +3,7 @@ import {BankAccount} from "../../core/entity";
 import {IncomeForListingDTO} from "../dto/IncomeForListingDTO";
 import {BankAccountForIncomeListingDTO} from "../dto/BankAccountForIncomeListingDTO";
 import {BusinessException} from "../../core/exception/BusinessException";
+import {TransactionType} from "../../core/enum/TransactionType";
 
 export class BankAccountTransactionQuery {
     private bankAccountRepository: Repository<BankAccount>;
@@ -11,6 +12,7 @@ export class BankAccountTransactionQuery {
         this.bankAccountRepository = bankAccountRepository;
     }
 
+    /*TODO: add the other types of transaction (outcome, transfer)*/
     async getAllFromBankAccount(bankAccountId: number): Promise<IncomeForListingDTO[]> {
         const bankAccount = await this.bankAccountRepository.findOne({
             select: {id: true, bank: true, account: true, agency: true},
@@ -41,5 +43,9 @@ export class BankAccountTransactionQuery {
                 income.date,
                 income.type, new BankAccountForIncomeListingDTO(bankAccount.bank, bankAccount.account, bankAccount.agency))));
         }, []);
+    }
+
+    getTransactionTypes(): { string: string } {
+        return TransactionType.list();
     }
 }
