@@ -1,4 +1,3 @@
-const { entrada } = require("./");
 module.exports = (sequelize, DataTypes) => {
   let ContaBancaria = sequelize.define(
     "conta_bancaria",
